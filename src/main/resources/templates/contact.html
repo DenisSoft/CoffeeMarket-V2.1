@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title th:text="#{header.contact}"></title>
+    <div th:include="fragments/styles-connect :: styles-connect"></div>
+</head>
+<body>
+<header>
+    <div th:include="fragments/header :: header"></div>
+</header>
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a th:href="@{/}" th:text="#{header.home}"></a></li>
+                    <li th:text="#{header.contact}"></li>
+                </ol>
+                <h1 th:text="#{contact.coordinates}"></h1>
+                <article class="article">
+                    <ul>
+                        <li th:text="#{contact.phone}"></li>
+                        <li th:text="#{contact.mobile}"></li>
+                        <li>E-mail: <a href="mailto:baradavkin@gmail.com">baradavkin@gmail.com</a></li>
+                        <li>Skype: <a href="skype:baradaminsk?chat">baradaminsk</a></li>
+                        <li th:text="#{contact.mailing.address}"></li>
+                    </ul>
+                    <p th:text="#{contact.shop.located}"></p>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4708.469866487986!2d27.614036514847932!3d53.838685251693555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dbd220ad1f5fcb%3A0x99a0c3b520a429c6!2z0YPQuy4g0JPQvtC70L7QtNC10LTQsCA3NSwg0JzQuNC90YHQug!5e0!3m2!1sru!2sby!4v1504441880440" width="720" height="450" frameborder="0" style="border:0" allowfullscreen=""></iframe>
+                    <p th:text="#{contact.opportunity.come}">
+                        <a th:href="@{/shipping}" th:text="#{header.shipping}"></a>
+                    </p>
+                </article>
+            </div>
+         </div>
+    </div>
+</div>
+<footer>
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

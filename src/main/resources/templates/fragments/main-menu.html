@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+</head>
+<body>
+<div th:fragment="main-menu-admin">
+    <ul class="ot-menu ot-dropdown-100 menu">
+        <li class="ot-menu-item level1 current active first notColumn"
+            style="z-index:35000;">
+            <div><a class="item-link level1" href="/">
+                <span class="item-text " th:text="#{header.home}">Главная</span></a>
+            </div>
+        </li>
+        <li class="ot-menu-item level1 deeper hasChild notColumn"
+            style="z-index:34999;">
+            <div><a class="item-link level1" th:href="@{/Admin/AllProducts/{id}(id=1)}">
+                <span class="item-text " th:text="#{header.products}">Товары</span></a>
+                <div class="submenu-wrap submenu-wrap-level1" style="width: 200px; margin: 0px; padding: 5px; left: auto; visibility: visible; display: none;">
+                    <div class="submenu-wrap-i">
+                        <div class="submenu-wrap-ii">
+                            <ul class="ot-menu child-menu">
+                                <li id="omi-491" class="ot-menu-item level2 deeper hasChild notColumn" style="z-index:34968;">
+                                    <div><a class="item-link level2" th:href="@{/Admin/AllProducts/{id}(id=1)}">
+                                        <span class="item-text" th:text="#{header.allProducts}">Все товары</span></a>
+                                        <div class="submenu-wrap submenu-wrap-level2" style="width: 200px; margin: 0px; padding: 5px; left: 200px; visibility: visible; display: none;">
+                                            <div class="submenu-wrap-i">
+                                                <div class="submenu-wrap-ii">
+                                                    <ul class="ot-menu child-menu"
+                                                        th:each="category : ${session.categories}">
+                                                        <li class="ot-menu-item level3 first notColumn" style="z-index:34998;">
+                                                            <div>
+                                                                <a class="item-link level3"
+                                                                   th:href="@{/Admin/AllProducts/{id}
+                                                                   (id=${category.id})}">
+                                                                    <span class="item-text"
+                                                                          th:text="${category.name}">Шампуни</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="ot-menu-item level2 first notColumn"
+                                    style="z-index:34998;">
+                                    <div><a class="item-link level2" href="/Admin/NewProduct">
+                                        <span class="item-text"
+                                              th:text="#{header.addProducts}">Добавить товар</span></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li class="ot-menu-item level1 deeper hasChild notColumn"
+            style="z-index:34999;">
+            <div><a class="item-link level1" href="/Admin/AllCategories">
+                <span class="item-text " th:text="#{header.category}">Категории</span></a>
+                <div class="submenu-wrap submenu-wrap-level1"
+                     style="width: 200px; margin: 0px; padding: 5px; left: auto; visibility: visible; display: none;">
+                    <div class="submenu-wrap-i">
+                        <div class="submenu-wrap-ii">
+                            <ul class="ot-menu child-menu">
+                                <li class="ot-menu-item level2 first notColumn" style="z-index:34998;">
+                                    <div><a class="item-link level2" href="/Admin/AllCategories">
+                                        <span class="item-text"
+                                              th:text="#{header.allCategory}">Все категории</span></a>
+                                    </div>
+                                </li>
+                                <li class="ot-menu-item level2 notColumn" style="z-index:34997;">
+                                    <div><a class="item-link level2" href="/Admin/NewCategory">
+                                        <span class="item-text"
+                                              th:text="#{header.createCategory}">Добавить категорию</span></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="ot-menu-item level1 notColumn" style="z-index:34961;">
+            <div><a class="item-link level1" href="/Admin/AllPersons">
+                <span class="item-text " th:text="#{header.allPerson}">Пользователи</span></a>
+            </div>
+        </li>
+        <li class="ot-menu-item level1 notColumn" style="z-index:34961;">
+            <div><a class="item-link level1" href="/Admin/AllOrders">
+                <span class="item-text " th:text="#{header.allOrders}">Заказы</span></a>
+            </div>
+        </li>
+        <li class="ot-menu-item level1 deeper hasChild notColumn"
+            style="z-index:34999;">
+            <div><a class="item-link level1" th:href="@{/Admin/ShowAllReviews/{moderation}(moderation='true')}">
+                <span class="item-text" th:text="#{header.review}">Отзывы</span></a>
+                <div class="submenu-wrap submenu-wrap-level1"
+                     style="width: 200px; margin: 0px; padding: 5px; left: auto; visibility: visible; display: none;">
+                    <div class="submenu-wrap-i">
+                        <div class="submenu-wrap-ii">
+                            <ul class="ot-menu child-menu">
+                                <li class="ot-menu-item level2 first notColumn" style="z-index:34998;">
+                                    <div><a class="item-link level2"
+                                            th:href="@{/Admin/ShowAllReviews/{moderation}(moderation='true')}">
+                                        <span class="item-text"
+                                              th:text="#{header.allReviewPublished}">Опубликованные</span></a>
+                                    </div>
+                                </li>
+                                <li class="ot-menu-item level2 notColumn" style="z-index:34997;">
+                                    <div><a class="item-link level2"
+                                            th:href="@{/Admin/ShowAllReviews/{moderation}(moderation='false')}">
+                                        <span class="item-text"
+                                              th:text="#{header.allReviewUnpublished}">На модерации</span></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="ot-menu-item level1 deeper hasChild notColumn"
+            style="z-index:34999;">
+            <div><a class="item-link level1" href="/Admin/Articles">
+                <span class="item-text " th:text="#{header.magazine}">Журнал</span></a>
+                <div class="submenu-wrap submenu-wrap-level1"
+                     style="width: 200px; margin: 0px; padding: 5px; left: auto; visibility: visible; display: none;">
+                    <div class="submenu-wrap-i">
+                        <div class="submenu-wrap-ii">
+                            <ul class="ot-menu child-menu">
+                                <li class="ot-menu-item level2 first notColumn" style="z-index:34998;">
+                                    <div><a class="item-link level2" href="/Admin/Articles">
+                                        <span class="item-text"
+                                              th:text="#{header.allArticles}">Все статья</span></a>
+                                    </div>
+                                </li>
+                                <li class="ot-menu-item level2 notColumn" style="z-index:34997;">
+                                    <div><a class="item-link level2" href="/Admin/NewArticle">
+                                        <span class="item-text"
+                                              th:text="#{header.newArticles}">Добавить статью</span></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div th:fragment="main-menu-user">
+    <ul class="ot-menu ot-dropdown-100 menu ">
+        <li class="ot-menu-item level1 current active first notColumn"
+            style="z-index:35000;">
+            <div><a class="item-link level1" href="/">
+                <span class="item-text " th:text="#{header.home}">Главная</span></a>
+            </div>
+        </li>
+        <li class="ot-menu-item level1 deeper hasChild notColumn"
+            style="z-index:34999;">
+            <div><a class="item-link level1" href="/ProductsInCategory/1/0/3">
+                <span class="item-text " th:text="#{header.products}">Товары</span></a>
+                <div class="submenu-wrap submenu-wrap-level1"
+                     style="width: 200px; margin: 0px; padding: 5px; left: auto; visibility: visible; display: none;">
+                    <div class="submenu-wrap-i">
+                        <div class="submenu-wrap-ii">
+                            <ul class="ot-menu child-menu" th:each="category : ${session.categories}">
+                                <li class="ot-menu-item level2 first notColumn" style="z-index:34998;">
+                                    <div>
+                                        <a class="item-link level2"
+                                           th:href="@{/ProductsInCategory/{id}/{firstResult}/{maxResults}
+                                               (id=${category.id}, firstResult=0, maxResults=3)}">
+                                            <span class="item-text" th:text="${category.name}">Шампуни</span>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="ot-menu-item level1 notColumn" style="z-index:34961;">
+            <div><a class="item-link level1" href="/Articles">
+                <span class="item-text " th:text="#{header.magazine}">Журнал</span></a>
+            </div>
+        </li>
+        <li class="ot-menu-item level1 notColumn" style="z-index:34960;">
+            <div><a class="item-link level1" href="/AboutAs">
+                <span class="item-text" th:text="#{header.aboutUs}">О предприятии</span></a>
+            </div>
+        </li>
+        <li class="ot-menu-item level1 last notColumn" style="z-index:34959;">
+            <div><a class="item-link level1" href="/ContactUs">
+                <span class="item-text " th:text="#{header.contact}">Контакты</span></a>
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

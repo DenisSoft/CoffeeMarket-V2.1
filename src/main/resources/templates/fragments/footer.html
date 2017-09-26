@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+</head>
+<body>
+<div th:fragment="footer">
+    <div class="container footer" >
+        <nav>
+            <div class="footer-blocks">
+                <div class="row">
+                    <div class="col-xs-3 first-col footer-schedule">
+                        <div class="footer-schedule-header" th:text="#{header.schedule}"></div>
+                        <div class="footer-days" th:text="#{header.days}"></div>
+                        <div class="footer-schedule-separator">
+                        </div>
+                        <div class="footer-dayoff" th:text="#{header.dayoff}"></div>
+                        <div class="footer-socials clearfix">
+                            <a class="footer-social-link" target="_blank" href="https://twitter.com">
+                                <span class="footer-social-icon twitter"></span>
+                            </a>
+                            <a class="footer-social-link" target="_blank" href="https://ru.foursquare.com">
+                                <span class="footer-social-icon forsquare"></span>
+                            </a>
+                            <a class="footer-social-link" target="_blank" href="https://www.facebook.com">
+                                <span class="footer-social-icon fb"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 footer-contacts">
+                        +375 (17) 340 73 75 <br />
+                        +375 (29) 684 90 31
+                        <a class="footer-mail" href="mailto:kofemarket@gmail.com">baradavkin@gmail.com</a><br />
+                        skype: <a href="skype:kofemarket.ua?chat">baradaminsk</a><br />
+                    </div>
+                    <div class="col-xs-3">
+                        <ul class="nav footer-nav">
+                            <li><a href="/" th:text="#{header.home}"></a></li>
+                            <li><a href="/coffee" th:text="#{header.coffee}"></a></li>
+                            <li><a href="/shipping" th:text="#{header.shipping}"></a></li>
+                            <li><a href="/about-us" th:text="#{header.about.us}"></a></li>
+                            <li><a href="/contact" th:text="#{header.contact}"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="copyright">Copyright © 2017 DenisSoft</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

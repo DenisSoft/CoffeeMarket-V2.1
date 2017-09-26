@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Кофемаркет</title>
+    <div th:include="fragments/styles-connect :: styles-connect"></div>
+</head>
+
+<body>
+<header>
+    <div th:include="fragments/header :: header"></div>
+</header>
+<div class="content">
+    <div class="container">
+        <div th:if="${session.n > 0}" class="striped-header thin text-center">
+            <h2 class="striped text-center"
+                th:text="#{home.free.cup1} + ${session.n +1} + ' ' + #{home.free.cup2}">
+            </h2>
+        </div>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img th:src="@{../img/3.jpg}"/>
+                </div>
+                <div class="item">
+                    <img th:src="@{../img/1.jpg}"/>
+                </div>
+                <div class="item">
+                    <img th:src="@{../img/2.jpg}"/>
+                </div>
+            </div>
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev"></a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next"></a>
+        </div>
+        <div th:if="${session.x > 0}" class="striped-header thin text-center">
+            <h2 class="striped text-center"
+                th:text="#{home.free.shipping1} + ${session.x} + ' ' + #{home.free.shipping2}">
+            </h2>
+        </div>
+    </div>
+</div>
+<footer>
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

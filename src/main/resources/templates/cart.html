@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title th:text="#{header.cart}"></title>
+    <div th:include="fragments/styles-connect :: styles-connect"></div>
+</head>
+<body>
+<header>
+    <div th:include="fragments/header :: header"></div>
+</header>
+<div class="content">
+    <div class="container">
+        <section>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div th:if="${session.cart == null or session.cart.quantityInCart() == 0}">
+                        <div th:if="${success}">
+                            <h1 th:text="#{messages.buy.ok}"></h1>
+                        </div>
+                        <div th:unless="${success}">
+                            <h1 th:text="#{header.cart.empty}"></h1>
+                        </div>
+                    </div>
+                    <div class="cart" th:unless="${session.cart == null or session.cart.quantityInCart() == 0}">
+                        <form th:action="@{/cart/checkout}" method="post">
+                            <div class="cart__block">
+                                <h1 class="page-header_top_null" th:text="#{your.cart}"></h1>
+                                <table class="table table-bordered table-hover">
+                                    <tbody><tr class="well">
+                                        <th><span th:text="#{cart.product}"></span></th>
+                                        <th><span th:text="#{cart.unit.price}"></span></th>
+                                        <th><span th:text="#{cart.amount}"></span></th>
+                                        <th><span th:text="#{cart.total}"></span></th>
+                                        <th></th>
+                                    </tr>
+                                    <tr th:each="orderItem : ${session.cart.coffeeOrderItemList}" class="cart__item">
+                                        <td class="cart__item-name"  th:text="#{locale} == 'en' ?
+                                                    ${orderItem.coffeeType.nameEn} : ${orderItem.coffeeType.nameRu}">
+                                        </td>
+                                        <td class="cart__item-cost" th:text="${orderItem.coffeeType.price} +' TGR'">
+                                         </td>
+                                        <td class="cart__item-select-count" th:text="${orderItem.quantity}" >
+                                        </td>
+                                        <td class="cart__item-total-price" th:text="${(orderItem.quantity -
+                                        (orderItem.quantity / (session.n + 1))) * orderItem.coffeeType.price} +' TGR'">
+                                        </td>
+                                        <td class="cart__item-remove text-center">
+                                            <a class="delete btn btn-danger btn-xs"
+                                               th:href="@{/cart/removing/{id}(id=${orderItem.coffeeType.id})}">×</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td th:colspan="3" th:text="#{cart.delivery}"></td>
+                                        <td th:text="${session.delivery} +' TGR'"></td>
+                                        <td></td>
+                                    </tr>
+                                    </tbody></table>
+                                <span class="cart__total-sum alert alert-success total_sum right"
+                                      th:text="#{cart.total.amount} + ' '
+                                      + ${session.cart.cost + session.delivery} + ' TGR'">
+                                </span>
+                            </div>
+                            <div class="cart__block">
+                                <div class="striped-header thin text-center">
+                                    <h2 class="striped text-center" th:text="#{cart.ordering}"></h2>
+                                </div>
+                            </div>
+                            <h3 th:text="#{cart.where.deliver}"></h3>
+                            <div class="row">
+                                <div class="col-xs-10">
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <label th:for="${session.cart.name}" class="col-sm-2 control-label"
+                                                   aria-invalid="false" th:text="#{cart.full.name}">
+                                            </label>
+                                            <div class="col-sm-7">
+                                                <input name="name" type="text" class="form-control"
+                                                       pattern="^[ a-zA-Zа-яА-Я]+$" required="required"
+                                                       th:placeholder=
+                                                               "${error_name} ? ${error_name} : #{login.username}"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label th:for="${session.cart.email}" class="col-sm-2 control-label"
+                                                   aria-invalid="false"><b>Email</b></label>
+                                            <div class="col-sm-7">
+                                                <input name="email" required="required" class="form-control"
+                                                        type="email"
+                                                       th:placeholder=
+                                                               "${error_email} ? ${error_email} : #{login.email}"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label th:for="${session.cart.phone}" class="col-sm-2 control-label"
+                                                   aria-invalid="false"><b th:text="#{cart.phone}"></b></label>
+                                            <div class="col-sm-7">
+                                                <input name="phone" pattern="\+375\(\d{2}\)\d{7}"
+                                                       required="required" type="tel" class="form-control"
+                                                       th:placeholder=
+                                                               "${error_phone} ? ${error_phone} : #{login.phone}"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label th:for="${session.cart.deliveryAddress}" aria-invalid="false"
+                                                   class="col-sm-2 control-label" th:text="#{cart.delivery.address}">
+                                            </label>
+                                            <div class="col-sm-7">
+                                                <input name="deliveryAddress" pattern="^[ .,a-zA-Zа-яА-Я0-9]+$"
+                                                       required="required" type="text" class="form-control"
+                                                       th:placeholder=
+                                                             "${error_address} ? ${error_address} : #{login.address}"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2">&nbsp;</label>
+                                            <div class="col-sm-7">
+                                                 <button type="submit" class="btn btn-success"
+                                                         th:text="#{cart.send.order}"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<footer>
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

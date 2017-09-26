@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title th:text="#{header.shipping}"></title>
+    <div th:include="fragments/styles-connect :: styles-connect"></div>
+</head>
+<body>
+<header>
+    <div th:include="fragments/header :: header"></div>
+</header>
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="page_title">
+                    <ol class="breadcrumb">
+                        <li><a th:href="@{/}" th:text="#{header.home}"></a></li>
+                        <li th:text="#{header.shipping}"></li>
+                    </ol>
+                    <h1 class="float_left" th:text="#{header.shipping}"></h1>
+                </div>
+                <div class="book_block_general">
+                    <p>
+                    </p><h2 th:text="#{shipping.delivery}"></h2>
+                    <h3 th:text="#{shipping.pickup}"></h3>
+                    <p th:text="#{shipping.address}"></p>
+                    <ul><b th:text="#{header.schedule}"></b>
+                        <li th:text="#{header.days}"></li>
+                        <li th:text="#{header.dayoff}"></li>
+                    </ul>
+                    <h3 th:text="#{shipping.delivery.in}"></h3>
+                    <p th:text="#{cost.of.delivery} +${session.m} +' TGR. ' +#{delivery.is.free} +${session.x} +' TGR.'">
+                    </p>
+                    <ul><b th:text="#{delivery.mode}"></b>
+                        <li th:text="#{header.days}"></li>
+                        <li th:text="#{header.dayoff}"></li>
+                    </ul>
+
+                    <h3 th:text="#{payment.methods}"></h3>
+                    <ul>
+                        <li th:text="#{cash.on.receipt}"></li>
+                        <li th:text="#{bank.card}" ></li>
+                    </ul>
+                    <h3 th:text="#{denial.of.responsibility}"></h3>
+                    <p th:text="#{text.not.public}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

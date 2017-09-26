@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+</head>
+<body>
+<div th:fragment="header">
+    <nav>
+        <div class="navbar-top">
+            <div class="container">
+                <div class="header-top-user-menu pull-right">
+                    <ul class="nav navbar-nav user-menu">
+                        <li class="top-menu-item">
+                            <a class="top-menu-link" href="?language=en_US">English</a>
+                        </li>
+                        <li class="top-menu-item separator">
+                            /
+                        </li>
+                        <li class="top-menu-item active">
+                            <a class="top-menu-link" href="?language=ru_RU">Русский</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section>
+        <div class="header-content container">
+            <div class="logo">
+                <a href="/">
+                    <img th:if="#{locale} == 'en'"
+                         src="/img/header-logo-en.png" th:href="@{/img/header-logo-en.png}" />
+                    <img th:if="#{locale} == 'ru'"
+                         src="/img/header-logo.png" th:href="@{/img/header-logo.png}" />
+                    <span class="slogan" th:text="#{header.slogan}">делаем кофе лучше</span>
+                </a>
+            </div>
+            <div class="phone">
+                +375 (17) 340 73 75 <br />
+                +375 (29) 684 90 31
+            </div>
+            <div class="schedule">
+                <div class="schedule-header" th:text="#{header.schedule}"></div>
+                <div class="days" th:text="#{header.days}"></div>
+                <div class="schedule-separator">
+                </div>
+                <div class="dayoff" th:text="#{header.dayoff}"></div>
+            </div>
+            <a class="header-cart-box" th:href="@{/cart}">
+                <div class="shopping-cart">
+                    <div class="cart-fill">
+                        <div th:unless="${session.cart == null or session.cart.quantityInCart() == 0}">
+                            <div class="cart-count" th:text="#{header.cart.count} + ${session.cart.quantityInCart()}">
+                            </div>
+                            <div class="cart-summ-field" th:text="#{header.cart.sum}
+                                 + ${session.delivery + session.cart.cost} +' TGR'">
+                            </div>
+                        </div>
+                        <div th:if="${session.cart == null or session.cart.quantityInCart() == 0}"
+                             class="empty-cart" th:text="#{header.cart.empty}">
+                        </div>
+                    </div>
+                    <div class="header-cart-link" th:href="@{/cart}">
+                        <div class="cart-header is-full"></div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+    <nav>
+        <div class="header-bottom-nav">
+            <div class="container">
+                <ul class="nav navbar-nav header-bottom-navbar" id="header-bottom-navbar">
+                    <li class="menu-item">
+                        <a href="/" th:text="#{header.home}"></a>
+                    </li>
+                    <li class="menu-item">
+                        <a th:href="@{/coffee/{sort}(sort='without_sorting')}" th:text="#{header.coffee}"></a>
+                    </li>
+                    <li class="menu-item">
+                        <a th:href="@{/shipping}" th:text="#{header.shipping}"></a>
+                    </li>
+                    <li class="menu-item">
+                        <a th:href="@{/about-us}" th:text="#{header.about.us}"></a>
+                    </li>
+                    <li class="menu-item">
+                        <a th:href="@{/contact}" th:text="#{header.contact}"></a>
+                    </li>
+                </ul>
+                <div class="nav-find">
+                    <div class="top-search">
+                        <a th:href="@{/coffee/search}">
+                            <div class="header-search-toggle-btn" >
+                                <i class="search-icon"></i>
+                                <h th:text="#{header.find}"></h>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+</body>
+</html>

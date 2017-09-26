@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title th:text="#{sidebar.hit}"></title>
+    <div th:include="fragments/styles-connect :: styles-connect"></div>
+</head>
+<body>
+<header>
+    <div th:include="fragments/header :: header"></div>
+</header>
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div th:replace="fragments/user :: leftbar"></div>
+            <section>
+                <div class="col-xs-9">
+                    <div class="category">
+                        <ol class="breadcrumb catalog-breadcrumb">
+                            <li><a th:href="@{/}" th:text="#{header.home}"></a></li>
+                            <li th:text="#{sidebar.hit}"></li>
+                        </ol>
+                        <h1 th:text="#{sidebar.hit}"></h1>
+                        <div th:replace="fragments/user :: show-coffee"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<footer>
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

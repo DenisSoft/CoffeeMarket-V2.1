@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Admin</title>
+    <div th:include="fragments/styles-connect :: styles-connect"></div>
+</head>
+
+<body>
+<header>
+    <div th:include="fragments/admin-fragments :: header"></div>
+</header>
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12"><br/>
+                <table class="table table-bordered table-hover">
+                    <tbody><tr class="well">
+                        <th><span>#</span></th>
+                        <th><span>Заказчик</span></th>
+                        <th><span>Дата</span></th>
+                        <th><span>Состав</span></th>
+                        <th><span>Стоимость</span></th>
+                        <th></th>
+                    </tr>
+                    <tr th:each="order : ${orders}" class="cart__item">
+                        <td class="cart__item-name"  th:text="${order.id}"></td>
+                        <td class="cart__item-name">
+                            <p th:text="'Имя: ' + ${order.name}"></p>
+                            <p th:text="'E-mail: ' + ${order.email}"></p>
+                            <p th:text="'Телефон: ' + ${order.phone}"></p>
+                            <p th:text="'Адрес: ' + ${order.deliveryAddress}"></p>
+                        </td>
+                        <td class="cart__item-name">
+                            <p type="date" th:text="${order.orderDate}"></p>
+                        </td>
+                        <td  class="cart__item-name">
+                            <div th:each="orderItem : ${order.coffeeOrderItemList}">
+                                <p th:text="${orderItem.coffeeType.nameRu} +' - ' + ${orderItem.quantity} + 'шт.'"></p>
+                            </div>
+                        </td>
+                        <td class="cart__item-name"  th:text="${order.cost}"></td>
+                        <td class="cart__item-remove text-center">
+                            <a class="delete btn btn-danger btn-xs"
+                               th:href="@{/admin/delete-order/{id}(id=${order.id})}">×</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="fragments/admin-fragments :: footer"></div>
+</body>
+</html>

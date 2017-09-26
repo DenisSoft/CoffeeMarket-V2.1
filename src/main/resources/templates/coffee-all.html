@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Admin</title>
+    <div th:include="fragments/styles-connect :: styles-connect"></div>
+</head>
+<body>
+<header>
+    <div th:include="fragments/admin-fragments :: header"></div>
+</header>
+<div th:include="fragments/admin-fragments :: all-coffee"></div>
+<div th:replace="fragments/admin-fragments :: footer"></div>
+</body>
+</html>

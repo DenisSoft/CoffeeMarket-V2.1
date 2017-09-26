@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+</head>
+<body>
+
+<div th:fragment="search">
+    <div class="container">
+        <div class="row">
+            <div class="main-search">
+
+                <form class="footer-search-form" method="post" action="/coffee/search">
+                    <div class="input-group">
+                        <input type="text" class="form-control search input-lg" id="name" name="name"
+                               th:placeholder="#{example.request}"/>
+                        <span class="input-group-btn">
+                             <input class="btn btn-danger btn-lg search" type="submit" th:value="#{header.find}"/>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="header-text">
+    <h1 th:text="#{coffee.header}"></h1>
+    <article style="margin-bottom: 35px">
+        <p th:text="#{coffee.text1}"></p>
+        <p th:text="#{coffee.text2}"></p>
+        <hr />
+    </article>
+</div>
+
+<div th:fragment="leftbar">
+    <aside>
+        <div class="col-xs-3">
+            <nav>
+                <div class="leftbar">
+                    <div class="leftbar_wrapper">
+                        <div class="panel special-menu">
+                            <ul>
+                                <li>
+                                    <i class="sidebar-icon hit"></i>
+                                    <a th:href="@{/coffee/hit}" th:text="#{sidebar.hit}"></a>
+                                </li>
+                                <li>
+                                    <i class="sidebar-icon new"></i>
+                                    <a th:href="@{/coffee/new}" th:text="#{sidebar.new}"></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="quote-joke">
+                            <blockquote th:if="${quote}">
+                                <p th:text="#{locale} == 'en' ? ${quote.textEn} : ${quote.textRu}"></p>
+                                <footer th:text="#{locale} == 'en' ? ${quote.authorEn} : ${quote.authorRu}">
+                                </footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </aside>
+</div>
+
+<div th:fragment="sorting">
+    <div class="filters-panel panel">
+        <div class="filters">
+            <span class="filters-label">
+                <i class="arrow-icon both"></i>
+                <h th:text="#{coffee.sorting}"></h>
+            </span>
+            <a th:href="@{/coffee/{sort}(sort='cheaper')}"
+               th:text="#{coffee.cheaper}"></a>
+            <a th:href="@{/coffee/{sort}(sort='expensive')}"
+               th:text="#{coffee.expensive}"></a>
+            <a th:href="@{/coffee/{sort}(sort='popularity')}"
+               th:text="#{coffee.popularity}"></a>
+        </div>
+    </div>
+</div>
+<div th:fragment="show-coffee">
+    <div class="products-list" th:each="type : ${coffee_types}">
+        <div class="panel product-panel">
+            <h2 class="product-title">
+                <a href="" th:text="#{locale} == 'en' ? ${type.nameEn} : ${type.nameRu}"></a>
+            </h2>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="product-badges">
+                        <ul class="badges-list">
+                        </ul>
+                    </div>
+                    <div class="product-photo">
+                        <img th:src="@{/img/coffee/{image}
+                             (image=${type.image == null ? 'no-images.jpg' : type.image})}" />
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="product-price">
+                        <div class="price-block">
+                            <div class="price" th:text="${type.price} +' TGR'">
+                            </div>
+                        </div>
+                        <div class="cart-block">
+                            <form th:action="@{/cart/add}" method="post" th:object="${coffeeOrderItem}">
+                                <div class="buy-btn">
+                                    <p>
+                                        <label>
+                                            <select class="form-control quantity" th:field="*{quantity}">
+                                                <option th:each="i : ${#numbers.sequence(1, 100)}" th:value="${i}"
+                                                        th:text="${i}" ></option>
+                                            </select>
+                                        </label>
+                                    </p>
+
+                                    <input type="hidden" th:value="${type.id}" th:name="coffeeType.id" />
+                                    <input type="hidden" th:value="${type.nameRu}" th:name="coffeeType.nameRu" />
+                                    <input type="hidden" th:value="${type.nameEn}" th:name="coffeeType.nameEn" />
+                                    <input type="hidden" th:value="${type.price}" th:name="coffeeType.price" />
+                                    <button  class="btn btn-success btn-lg
+                                            btn-custom-buy" th:text="#{coffee.add.cart}">
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-5">
+                    <article th:text="#{locale} == 'en' ? ${type.descriptionEn} : ${type.descriptionRu}">
+                    </article>
+                </div>
+            </div>
+        </div><br />
+    </div>
+    <div th:if="${coffee_types != null}">
+        <div th:if="${#lists.isEmpty(coffee_types)}">
+            <h3 th:text="#{search.no.result}"></h3>
+        </div>
+    </div>
+</div>
+</body>
+</html>

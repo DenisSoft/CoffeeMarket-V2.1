@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title th:text="#{header.about.us}"></title>
+    <div th:include="fragments/styles-connect :: styles-connect"></div>
+</head>
+<body>
+<header>
+    <div th:include="fragments/header :: header"></div>
+</header>
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a th:href="@{/}" th:text="#{header.home}"></a></li>
+                    <li th:text="#{header.about.us}"></li>
+                </ol>
+                <h1 th:text="#{about.us}"></h1><br />
+                <img th:src="@{/img/about-us.jpg}" height="603" width="1200"/>
+                <article class="article"><br />
+                    <p th:text="#{about.us.generally}"></p>
+                </article>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>
